@@ -1,0 +1,279 @@
+<template>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="title">案例收集助手</h1>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          class="search-input" 
+          placeholder="搜索客户姓名或案例名称" 
+          v-model="searchQuery"
+          @input="onSearchInput"
+        />
+      </div>
+    </div>
+    
+    <!-- List -->
+    <div class="case-list">
+      <div v-if="filteredCases.length > 0">
+        <div 
+          v-for="item in filteredCases" 
+          :key="item.id" 
+          class="case-card"
+          @click="onCaseTap(item.id)"
+        >
+          <div class="case-type" :class="item.type">{{ item.type }}</div>
+          <span class="case-name">{{ item.name }}</span>
+          <div class="case-info">
+            <div class="info-item">
+              <span class="info-icon">👤</span>
+              <span class="info-text">{{ item.customerName }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">⏱️</span>
+              <span class="info-text">{{ item.duration }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">📅</span>
+              <span class="info-text">{{ item.date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div v-else class="empty-state">
+        <span class="empty-text">暂无相关案例</span>
+      </div>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <div class="fab" @click="onAddTap">
+      <span class="fab-icon">+</span>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import store from '../store/index'
+
+const router = useRouter()
+const searchQuery = ref('')
+
+const cases = computed(() => store.getCases())
+
+const filteredCases = computed(() => {
+  const query = searchQuery.value.toLowerCase()
+  if (!query) {
+    return cases.value
+  }
+  return cases.value.filter(c => 
+    c.name.toLowerCase().includes(query) || 
+    c.customerName.toLowerCase().includes(query)
+  )
+})
+
+const onSearchInput = () => {
+  // 由 computed 自动处理
+}
+
+const onCaseTap = (id) => {
+  router.push(`/detail/${id}`)
+}
+
+const onAddTap = () => {
+  router.push('/detail/new')
+}
+
+onMounted(() => {
+  store.refreshCases()
+})
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 48rpx 32rpx 32rpx;
+  border-radius: 0 0 32rpx 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 24rpx;
+  display: block;
+}
+
+.search-box {
+  position: relative;
+  background-color: #f3f4f6;
+  border-radius: 32rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 32rpx;
+  font-size: 32rpx;
+}
+
+.search-input {
+  width: 100%;
+  padding-left: 48rpx;
+  font-size: 26rpx;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.case-list {
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.case-card {
+  background-color: #ffffff;
+  border-radius: 32rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+  border: 1rpx solid #f3f4f6;
+  position: relative;
+  cursor: pointer;
+}
+
+.case-type {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  font-weight: bold;
+}
+
+.case-type.正常 {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.case-type.纠结 {
+  background-color: #ffedd5;
+  color: #ea580c;
+}
+
+.case-type.拒贷 {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.case-type.逾期 {
+  background-color: #f3e8ff;
+  color: #9333ea;
+}
+
+.case-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 16rpx;
+  padding-right: 80rpx;
+  display: block;
+}
+
+.case-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+  width: 50%;
+}
+
+.info-icon {
+  font-size: 24rpx;
+}
+
+.empty-state {
+  text-align: center;
+  padding-top: 160rpx;
+  color: #9ca3af;
+  font-size: 28rpx;
+}
+
+.fab {
+  position: fixed;
+  bottom: 64rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 128rpx;
+  height: 128rpx;
+  background-color: #2563eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(37, 99, 235, 0.3);
+  z-index: 100;
+  cursor: pointer;
+}
+
+.fab-icon {
+  color: #ffffff;
+  font-size: 56rpx;
+  font-weight: 300;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 375px) {
+  .header {
+    padding: 32rpx 24rpx 24rpx;
+  }
+  
+  .title {
+    font-size: 36rpx;
+  }
+  
+  .case-card {
+    padding: 20rpx;
+  }
+  
+  .case-name {
+    font-size: 28rpx;
+  }
+  
+  .fab {
+    width: 112rpx;
+    height: 112rpx;
+  }
+  
+  .fab-icon {
+    font-size: 48rpx;
+  }
+}
+</style>
