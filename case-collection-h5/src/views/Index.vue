@@ -1,282 +1,150 @@
 <template>
   <div class="container">
-    <!-- Header -->
     <div class="header">
       <h1 class="title">案例收集助手</h1>
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input 
-          class="search-input" 
-          placeholder="搜索客户姓名或案例名称" 
+        <input
+          class="search-input"
+          placeholder="搜索客户姓名或案例名称"
           v-model="searchQuery"
+          @input="handleSearch"
         />
       </div>
     </div>
-    
-    <!-- List -->
+
     <div class="case-list">
-      <div v-if="filteredCases.length > 0">
-        <div 
-          v-for="item in filteredCases" 
-          :key="item.id" 
-          class="case-card"
-          @click="onCaseTap(item.id)"
-        >
-          <div class="case-type" :class="item.type">{{ item.type }}</div>
-          <span class="case-name">{{ item.name }}</span>
-          <div class="case-info">
-            <div class="info-item">
-              <span class="info-icon">👤</span>
-              <span class="info-text">{{ item.customerName }}</span>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">⏱️</span>
-              <span class="info-text">{{ item.duration }}</span>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📅</span>
-              <span class="info-text">{{ item.date }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div v-else class="empty-state">
-        <span class="empty-text">暂无相关案例</span>
+      <div
+        v-for="item in filteredCases"
+        :key="item.id"
+        class="case-item"
+        @click="goToDetail(item.id)"
+      >
+        <div class="case-name">{{ item.name }}</div>
+        <div class="case-customer">{{ item.customer }}</div>
+        <div class="case-date">{{ item.date }}</div>
       </div>
     </div>
-    
-    <!-- Floating Action Button -->
-    <div class="fab" @click="onAddTap">
-      <span class="fab-icon">+</span>
-    </div>
+
+    <button class="add-btn" @click="goToRecording">+</button>
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { store } from '../store'
-
-const router = useRouter()
-const searchQuery = ref('')
-const cases = ref([])
-
-// 加载案例
-const loadCases = () => {
-  // 按日期排序
-  const sortedCases = [...store.cases].sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  )
-  cases.value = sortedCases
+<script>
+export default {
+  name: 'Index',
+  data() {
+    return {
+      searchQuery: '',
+      cases: []
+    }
+  },
+  computed: {
+    filteredCases() {
+      if (!this.searchQuery) return this.cases
+      return this.cases.filter(item => 
+        item.name.includes(this.searchQuery) || 
+        item.customer.includes(this.searchQuery)
+      )
+    }
+  },
+  mounted() {
+    this.loadCases()
+  },
+  methods: {
+    loadCases() {
+      const stored = localStorage.getItem('cases')
+      if (stored) {
+        this.cases = JSON.parse(stored)
+      } else {
+        this.cases = [
+          { id: 1, name: '高血压随访', customer: '张三', date: '2024-01-15' },
+          { id: 2, name: '糖尿病管理', customer: '李四', date: '2024-01-16' },
+          { id: 3, name: '冠心病复查', customer: '王五', date: '2024-01-17' }
+        ]
+        localStorage.setItem('cases', JSON.stringify(this.cases))
+      }
+    },
+    handleSearch() {
+      console.log('Searching:', this.searchQuery)
+    },
+    goToDetail(id) {
+      this.$router.push(`/detail/${id}`)
+    },
+    goToRecording() {
+      this.$router.push('/recording')
+    }
+  }
 }
-
-// 过滤后的案例列表
-const filteredCases = computed(() => {
-  if (!searchQuery.value) return cases.value
-  const query = searchQuery.value.toLowerCase()
-  return cases.value.filter(c => 
-    c.name.toLowerCase().includes(query) || 
-    c.customerName.toLowerCase().includes(query)
-  )
-})
-
-// 点击案例
-const onCaseTap = (id) => {
-  router.push(`/detail/${id}`)
-}
-
-// 添加新案例
-const onAddTap = () => {
-  router.push('/detail/new')
-}
-
-onMounted(() => {
-  loadCases()
-})
 </script>
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f3f4f6;
-  overflow: hidden;
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px;
 }
-
 .header {
-  background-color: #ffffff;
-  padding: 24px 16px 16px;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
+  margin-bottom: 20px;
 }
-
 .title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 12px;
-  display: block;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
 }
-
 .search-box {
-  position: relative;
-  background-color: #f3f4f6;
-  border-radius: 16px;
-  padding: 10px;
   display: flex;
   align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 15px;
 }
-
 .search-icon {
-  position: absolute;
-  left: 16px;
-  font-size: 16px;
+  margin-right: 10px;
 }
-
 .search-input {
-  width: 100%;
-  padding-left: 24px;
-  font-size: 13px;
-  background: transparent;
-  height: 36px;
-}
-
-.case-list {
   flex: 1;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
+  border: none;
+  outline: none;
+  font-size: 14px;
 }
-
-.case-card {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 12px;
+.case-list {
+  margin-bottom: 80px;
+}
+.case-item {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  border: 0.5px solid #f3f4f6;
-  position: relative;
   cursor: pointer;
 }
-
-.case-type {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.case-type.正常 {
-  background-color: #dcfce7;
-  color: #16a34a;
-}
-
-.case-type.纠结 {
-  background-color: #ffedd5;
-  color: #ea580c;
-}
-
-.case-type.拒贷 {
-  background-color: #fee2e2;
-  color: #dc2626;
-}
-
-.case-type.逾期 {
-  background-color: #f3e8ff;
-  color: #9333ea;
-}
-
 .case-name {
   font-size: 16px;
   font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 8px;
-  padding-right: 40px;
-  display: block;
+  color: #333;
+  margin-bottom: 5px;
 }
-
-.case-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  color: #6b7280;
-  width: 50%;
-}
-
-.info-icon {
-  font-size: 12px;
-}
-
-.empty-state {
-  text-align: center;
-  padding-top: 80px;
-  color: #9ca3af;
+.case-customer {
   font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
 }
-
-.fab {
+.case-date {
+  font-size: 12px;
+  color: #999;
+}
+.add-btn {
   position: fixed;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 64px;
-  height: 64px;
-  background-color: #2563eb;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
-  z-index: 100;
+  background: #007aff;
+  color: #fff;
+  font-size: 30px;
+  border: none;
   cursor: pointer;
-}
-
-.fab-icon {
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: 300;
-}
-
-/* 小屏幕适配 */
-@media (max-width: 375px) {
-  .header {
-    padding: 16px 12px 12px;
-  }
-  
-  .title {
-    font-size: 18px;
-  }
-  
-  .case-card {
-    padding: 10px;
-  }
-  
-  .case-name {
-    font-size: 14px;
-  }
-  
-  .fab {
-    width: 56px;
-    height: 56px;
-  }
-  
-  .fab-icon {
-    font-size: 24px;
-  }
+  box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
 }
 </style>
