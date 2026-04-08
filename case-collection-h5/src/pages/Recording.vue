@@ -288,45 +288,53 @@ onUnmounted(() => {
 }
 
 .header {
-  padding: 24rpx;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1px solid rgba(243, 244, 246, 0.6);
   flex-shrink: 0;
-  min-height: 88rpx;
+  min-height: 56px;
+  background-color: #ffffff;
 }
 
 .close-btn,
 .complete-btn {
-  width: 64rpx;
-  height: 48rpx;
+  width: 48px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:active,
+.complete-btn:active {
+  background-color: #f3f4f6;
 }
 
 .close-icon {
-  font-size: 40rpx;
+  font-size: 22px;
   color: #6b7280;
 }
 
 .complete-text {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
+  color: #667eea;
   white-space: nowrap;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 700;
   color: #1f2937;
   flex: 1;
   text-align: center;
-  margin: 0 16rpx;
+  margin: 0 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -340,31 +348,31 @@ onUnmounted(() => {
 }
 
 .hint-box {
-  margin: 32rpx;
-  background-color: #dbeafe;
-  border-radius: 32rpx;
-  padding: 24rpx;
+  margin: 20px 16px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 16px;
+  padding: 16px;
 }
 
 .hint-header {
   display: flex;
   align-items: center;
-  gap: 12rpx;
-  margin-bottom: 16rpx;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .hint-icon {
-  font-size: 32rpx;
+  font-size: 18px;
 }
 
 .hint-title {
-  font-size: 26rpx;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
   color: #2563eb;
 }
 
 .hint-text {
-  font-size: 26rpx;
+  font-size: 13px;
   color: #1e40af;
   line-height: 1.6;
   display: block;
@@ -374,22 +382,23 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 64rpx 32rpx;
+  padding: 40px 24px;
 }
 
 .timer {
-  font-family: monospace;
-  font-size: 96rpx;
-  font-weight: bold;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 56px;
+  font-weight: 700;
   color: #1f2937;
-  letter-spacing: -4rpx;
-  margin-bottom: 32rpx;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  font-variant-numeric: tabular-nums;
 }
 
 .status-badge {
   background-color: #f3f4f6;
-  padding: 12rpx 32rpx;
-  border-radius: 32rpx;
+  padding: 8px 24px;
+  border-radius: 20px;
   transition: all 0.3s ease;
 }
 
@@ -408,17 +417,17 @@ onUnmounted(() => {
 }
 
 .status-text {
-  font-size: 26rpx;
+  font-size: 14px;
   color: #4b5563;
   font-weight: 500;
 }
 
 .controls-section {
-  padding: 48rpx 32rpx 80rpx;
+  padding: 32px 24px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32rpx;
+  gap: 24px;
   flex-shrink: 0;
 }
 
@@ -426,19 +435,24 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32rpx;
+  gap: 24px;
   width: 100%;
-  max-width: 500rpx;
+  max-width: 320px;
 }
 
 .control-btn {
-  width: 96rpx;
-  height: 96rpx;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:active {
+  transform: scale(0.92);
 }
 
 .delete-btn {
@@ -450,18 +464,18 @@ onUnmounted(() => {
 }
 
 .play-btn {
-  width: 160rpx;
-  height: 160rpx;
-  background-color: #2563eb;
-  box-shadow: 0 8rpx 32rpx rgba(37, 99, 235, 0.3);
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
 }
 
 .btn-icon {
-  font-size: 36rpx;
+  font-size: 22px;
 }
 
 .btn-icon-large {
-  font-size: 56rpx;
+  font-size: 32px;
   color: #ffffff;
 }
 
@@ -474,29 +488,30 @@ onUnmounted(() => {
 }
 
 .record-btn-inner {
-  width: 192rpx;
-  height: 192rpx;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 16rpx 48rpx rgba(37, 99, 235, 0.4);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
   z-index: 10;
   transition: all 0.3s ease;
 }
 
 .record-btn-inner.recording {
-  background-color: #ef4444;
-  transform: scale(1.1);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(239, 68, 68, 0.4);
 }
 
 .mic-icon {
-  font-size: 72rpx;
+  font-size: 36px;
 }
 
 .stop-icon {
-  font-size: 56rpx;
+  font-size: 28px;
   color: #ffffff;
 }
 
@@ -505,8 +520,8 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 192rpx;
-  height: 192rpx;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   background-color: #ef4444;
   animation: pulse 1.5s ease-out infinite;
@@ -525,53 +540,55 @@ onUnmounted(() => {
 }
 
 .control-hint {
-  font-size: 26rpx;
+  font-size: 14px;
   color: #9ca3af;
   font-weight: 500;
   text-align: center;
 }
 
-/* 小屏幕适配 */
+/* 响应式适配 */
 @media (max-width: 375px) {
   .header {
-    padding: 20rpx;
+    padding: 12px 14px;
   }
   
   .title {
-    font-size: 28rpx;
-    margin: 0 16rpx;
+    font-size: 16px;
+    margin: 0 10px;
   }
   
   .timer {
-    font-size: 80rpx;
+    font-size: 48px;
   }
   
   .controls-section {
-    padding: 40rpx 24rpx 60rpx;
+    padding: 28px 20px 50px;
   }
   
   .record-btn-inner {
-    width: 160rpx;
-    height: 160rpx;
+    width: 76px;
+    height: 76px;
   }
   
   .mic-icon {
-    font-size: 64rpx;
+    font-size: 32px;
   }
   
   .play-btn {
-    width: 140rpx;
-    height: 140rpx;
+    width: 70px;
+    height: 70px;
   }
   
   .control-btn {
-    width: 80rpx;
-    height: 80rpx;
+    width: 50px;
+    height: 50px;
   }
-  
-  .placeholder {
-    width: 80rpx;
-    height: 80rpx;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 </style>

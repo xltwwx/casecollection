@@ -250,92 +250,111 @@ route.params.id // 触发 watch
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #f3f4f6;
+  background-color: #f8fafc;
   overflow: hidden;
 }
 
 .header {
-  background-color: #ffffff;
-  padding: 24rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1rpx solid #f3f4f6;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
   flex-shrink: 0;
 }
 
 .back-btn {
-  width: 48rpx;
-  height: 48rpx;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.back-btn:active {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .back-icon {
-  font-size: 40rpx;
-  color: #4b5563;
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 300;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #1f2937;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
   flex: 1;
   text-align: center;
-  margin: 0 24rpx;
+  margin: 0 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .placeholder {
-  width: 48rpx;
+  width: 40px;
 }
 
 .edit-btn {
-  width: 64rpx;
-  height: 48rpx;
+  width: 52px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:active {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .edit-text {
-  font-size: 26rpx;
-  font-weight: bold;
-  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .modify-section {
-  margin-top: 16rpx;
-  padding-top: 16rpx;
-  border-top: 1rpx solid #f3f4f6;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(243, 244, 246, 0.6);
 }
 
 .modify-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8rpx;
-  padding: 16rpx;
+  gap: 6px;
+  padding: 10px;
   background-color: #fef3c7;
-  border-radius: 16rpx;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modify-btn:active {
+  transform: scale(0.98);
 }
 
 .modify-icon {
-  font-size: 24rpx;
+  font-size: 16px;
 }
 
 .modify-text {
-  font-size: 24rpx;
+  font-size: 13px;
   color: #92400e;
   font-weight: 500;
 }
 
 .content {
   flex: 1;
-  padding: 20rpx;
+  padding: 14px;
   box-sizing: border-box;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -344,14 +363,15 @@ route.params.id // 触发 watch
 
 .card {
   background-color: #ffffff;
-  border-radius: 32rpx;
-  padding: 24rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(243, 244, 246, 0.6);
 }
 
 .form-item {
-  margin-bottom: 24rpx;
+  margin-bottom: 18px;
 }
 
 .form-item:last-child {
@@ -359,98 +379,121 @@ route.params.id // 触发 watch
 }
 
 .label {
-  font-size: 22rpx;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 600;
   color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 1rpx;
-  margin-bottom: 12rpx;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
   display: block;
 }
 
 .input-wrapper {
   width: 100%;
-  background-color: #f9fafb;
-  border-radius: 24rpx;
-  padding: 0 32rpx;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 0 16px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #667eea;
+  background-color: #ffffff;
 }
 
 .input {
   width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  font-size: 28rpx;
+  height: 48px;
+  line-height: 48px;
+  font-size: 15px;
   border: none;
   background: transparent;
   outline: none;
+  color: #1f2937;
 }
 
 .picker-value {
   width: 100%;
-  background-color: #f9fafb;
-  border-radius: 24rpx;
-  padding: 24rpx 32rpx;
-  font-size: 28rpx;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 15px;
   color: #1f2937;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 48px;
+  line-height: 48px;
   box-sizing: border-box;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.picker-value:hover {
+  background-color: #f1f5f9;
 }
 
 .modules-list {
-  margin-bottom: 20rpx;
+  margin-bottom: 14px;
 }
 
 .module-card {
   background-color: #ffffff;
-  border-radius: 32rpx;
-  padding: 24rpx;
-  margin-bottom: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
-  border: 1rpx solid #f3f4f6;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(243, 244, 246, 0.6);
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.module-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
 }
 
 .module-left {
   display: flex;
   align-items: center;
-  gap: 16rpx;
+  gap: 12px;
   flex: 1;
 }
 
 .status-dot {
-  width: 16rpx;
-  height: 16rpx;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #e5e7eb;
+  transition: all 0.3s ease;
 }
 
 .status-dot.active {
   background-color: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
 }
 
 .module-title {
-  font-size: 28rpx;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
   color: #1f2937;
 }
 
 .module-action {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 24rpx;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32rpx;
+  font-size: 18px;
+  transition: all 0.2s ease;
 }
 
 .module-action.has-recording {
@@ -466,20 +509,26 @@ route.params.id // 触发 watch
 .submit-section {
   display: flex;
   justify-content: center;
-  padding: 48rpx 0 80rpx;
+  padding: 24px 0 40px;
 }
 
 .submit-btn {
-  width: 300rpx;
-  background-color: #2563eb;
+  width: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
-  border-radius: 24rpx;
-  font-size: 30rpx;
-  font-weight: bold;
-  box-shadow: 0 8rpx 24rpx rgba(37, 99, 235, 0.2);
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
   border: none;
   cursor: pointer;
-  padding: 12px 24px;
+  padding: 14px 32px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 }
 
 /* Modal */
@@ -494,59 +543,63 @@ route.params.id // 触发 watch
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
   background-color: #ffffff;
-  border-radius: 48rpx;
-  padding: 48rpx;
-  width: 600rpx;
+  border-radius: 24px;
+  padding: 32px 24px;
+  width: 85%;
+  max-width: 340px;
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .modal-icon {
-  width: 100rpx;
-  height: 100rpx;
-  background-color: #dbeafe;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
   color: #2563eb;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 56rpx;
-  margin: 0 auto 24rpx;
+  font-size: 32px;
+  margin: 0 auto 16px;
 }
 
 .modal-title {
-  font-size: 36rpx;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
   color: #1f2937;
   display: block;
-  margin-bottom: 16rpx;
+  margin-bottom: 10px;
 }
 
 .modal-desc {
-  font-size: 26rpx;
+  font-size: 14px;
   color: #6b7280;
   display: block;
-  margin-bottom: 48rpx;
-  line-height: 1.5;
+  margin-bottom: 28px;
+  line-height: 1.6;
 }
 
 .modal-buttons {
   display: flex;
-  gap: 20rpx;
+  gap: 12px;
 }
 
 .btn-cancel,
 .btn-confirm {
   flex: 1;
-  padding: 24rpx 0;
-  border-radius: 24rpx;
-  font-size: 28rpx;
-  font-weight: bold;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-cancel {
@@ -554,43 +607,59 @@ route.params.id // 触发 watch
   color: #4b5563;
 }
 
-.btn-confirm {
-  background-color: #2563eb;
-  color: #ffffff;
+.btn-cancel:active {
+  background-color: #e5e7eb;
 }
 
-/* 小屏幕适配 */
+.btn-confirm {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-confirm:active {
+  transform: scale(0.96);
+}
+
+/* 响应式适配 */
 @media (max-width: 375px) {
   .header {
-    padding: 20rpx;
+    padding: 12px 14px;
   }
   
   .title {
-    font-size: 28rpx;
-    margin: 0 16rpx;
+    font-size: 16px;
+    margin: 0 10px;
   }
   
   .content {
-    padding: 16rpx;
+    padding: 12px;
   }
   
   .card {
-    padding: 20rpx;
-    border-radius: 24rpx;
+    padding: 16px;
+    border-radius: 14px;
   }
   
   .module-card {
-    padding: 20rpx;
+    padding: 14px;
   }
   
   .submit-btn {
-    width: 260rpx;
-    font-size: 28rpx;
+    width: 180px;
+    font-size: 15px;
   }
   
   .modal-content {
-    width: 540rpx;
-    padding: 40rpx;
+    width: 90%;
+    padding: 28px 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 </style>
