@@ -97,78 +97,94 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #f3f4f6;
+  background-color: #f8fafc;
   overflow: hidden;
 }
 
 .header {
-  background-color: #ffffff;
-  padding: 48rpx 32rpx 32rpx;
-  border-radius: 0 0 32rpx 32rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 24px 20px 20px;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
   flex-shrink: 0;
 }
 
 .title {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 24rpx;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
   display: block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search-box {
   position: relative;
-  background-color: #f3f4f6;
-  border-radius: 32rpx;
-  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .search-icon {
   position: absolute;
-  left: 32rpx;
-  font-size: 32rpx;
+  left: 16px;
+  font-size: 18px;
+  opacity: 0.5;
 }
 
 .search-input {
   width: 100%;
-  padding-left: 48rpx;
-  font-size: 26rpx;
+  padding-left: 32px;
+  font-size: 15px;
   background: transparent;
   border: none;
   outline: none;
+  color: #1f2937;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
 }
 
 .case-list {
   flex: 1;
-  padding: 20rpx;
+  padding: 16px;
   box-sizing: border-box;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  padding-bottom: 100px;
 }
 
 .case-card {
   background-color: #ffffff;
-  border-radius: 32rpx;
-  padding: 24rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
-  border: 1rpx solid #f3f4f6;
+  border-radius: 20px;
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(243, 244, 246, 0.8);
   position: relative;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.case-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
 }
 
 .case-type {
   position: absolute;
-  top: 24rpx;
-  right: 24rpx;
-  padding: 6rpx 12rpx;
-  border-radius: 12rpx;
-  font-size: 20rpx;
-  font-weight: bold;
+  top: 14px;
+  right: 14px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .case-type.正常 {
@@ -192,88 +208,107 @@ onMounted(() => {
 }
 
 .case-name {
-  font-size: 32rpx;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 700;
   color: #1f2937;
-  margin-bottom: 16rpx;
-  padding-right: 80rpx;
+  margin-bottom: 12px;
+  padding-right: 70px;
   display: block;
 }
 
 .case-info {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
+  gap: 12px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 8rpx;
-  font-size: 24rpx;
+  gap: 6px;
+  font-size: 13px;
   color: #6b7280;
-  width: 50%;
+  flex: 1 1 calc(50% - 6px);
+  min-width: 140px;
 }
 
 .info-icon {
-  font-size: 24rpx;
+  font-size: 14px;
+  opacity: 0.7;
 }
 
 .empty-state {
   text-align: center;
-  padding-top: 160rpx;
+  padding-top: 120px;
   color: #9ca3af;
-  font-size: 28rpx;
+  font-size: 16px;
 }
 
 .fab {
   position: fixed;
-  bottom: 64rpx;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  width: 128rpx;
-  height: 128rpx;
-  background-color: #2563eb;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 32rpx rgba(37, 99, 235, 0.3);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
   z-index: 100;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fab:active {
+  transform: translateX(-50%) scale(0.9);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
 }
 
 .fab-icon {
   color: #ffffff;
-  font-size: 56rpx;
+  font-size: 32px;
   font-weight: 300;
 }
 
-/* 小屏幕适配 */
+/* 响应式适配 */
 @media (max-width: 375px) {
   .header {
-    padding: 32rpx 24rpx 24rpx;
+    padding: 20px 16px 16px;
   }
   
   .title {
-    font-size: 36rpx;
+    font-size: 22px;
   }
   
   .case-card {
-    padding: 20rpx;
+    padding: 16px 14px;
   }
   
   .case-name {
-    font-size: 28rpx;
+    font-size: 16px;
   }
   
   .fab {
-    width: 112rpx;
-    height: 112rpx;
+    width: 56px;
+    height: 56px;
   }
   
   .fab-icon {
-    font-size: 48rpx;
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .fab {
+    left: 50%;
   }
 }
 </style>
